@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmos — Weather Dashboard</title>
+    <link rel="stylesheet" href="weather.css">
+</head>
+<body>
+    <main class="dashboard">
+        <header class="topbar">
+            <a class="brand" href="#">
+                <span class="brand-icon">☁</span>
+                <span>atmos<span class="brand-dot">.</span></span>
+            </a>
+
+            <p class="topbar-label">WEATHER DASHBOARD</p>
+        </header>
+
+        <section class="search-section">
+            <div>
+                <p class="eyebrow">YOUR WEATHER, AT A GLANCE</p>
+                <h1>Discover your <span>sky.</span></h1>
+                <p class="subtitle">Real-time conditions and forecasts for your city.</p>
+            </div>
+
+            <form id="searchForm" class="search-box">
+                <span class="search-icon">⌕</span>
+                <input id="cityInput" type="text"
+                       placeholder="Search a city..." autocomplete="off"
+                       aria-label="City name" required>
+                <button id="searchBtn" type="submit">Search ↗</button>
+            </form>
+        </section>
+
+        <p id="status" class="status" role="status">
+            Search for a city to explore its weather.
+        </p>
+
+        <section id="weatherDashboard" class="weather-content" hidden>
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">CURRENT CONDITIONS</p>
+                    <h2 id="locationName">Your city</h2>
+                    <p id="localTime" class="muted"></p>
+                </div>
+                <span id="todayBadge" class="today-badge">TODAY</span>
+            </div>
+
+            <div class="main-grid">
+                <article class="current-card panel">
+                    <div class="current-top">
+                        <div>
+                            <p class="muted">CURRENT TEMPERATURE</p>
+                            <div class="temperature">
+                                <span id="temperature">--</span><span class="degree">°C</span>
+                            </div>
+                            <h3 id="condition">Loading...</h3>
+                            <p class="muted">Feels like <span id="feelsLike">--</span>°C</p>
+                        </div>
+                        <div id="weatherIcon" class="weather-icon">🌤️</div>
+                    </div>
+                    <div class="current-bottom">
+                        <span>☀️ <span id="daylight">--</span></span>
+                        <span>💧 <span id="rainChance">--</span>% rain chance</span>
+                    </div>
+                </article>
+
+                <article class="panel location-card">
+                    <div class="card-heading">
+                        <span class="card-icon">📍</span>
+                        <span class="muted">LOCATION</span>
+                    </div>
+                    <h3 id="cityLabel">--</h3>
+                    <p id="countryLabel" class="muted">--</p>
+                    <div class="location-decoration">◎</div>
+                    <p class="small-note">Local weather, wherever you are.</p>
+                </article>
+            </div>
+
+            <section class="panel forecast-panel">
+                <div class="section-heading compact">
+                    <div>
+                        <p class="eyebrow">THE NEXT 24 HOURS</p>
+                        <h2>Hourly forecast</h2>
+                    </div>
+                    <span class="muted small-note">Temperature · °C</span>
+                </div>
+                <div id="hourlyForecast" class="hourly-list"></div>
+            </section>
+
+            <section class="panel forecast-panel">
+                <div class="section-heading compact">
+                    <div>
+                        <p class="eyebrow">PLAN AHEAD</p>
+                        <h2>5-day forecast</h2>
+                    </div>
+                </div>
+                <div id="dailyForecast" class="daily-list"></div>
+            </section>
+
+            <section class="details-section">
+                <div class="section-heading compact">
+                    <div>
+                        <p class="eyebrow">THE DETAILS</p>
+                        <h2>Weather insights</h2>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <article class="metric-card panel">
+                        <div class="metric-top"><span>💧</span><span class="muted">HUMIDITY</span></div>
+                        <p><span id="humidity">--</span><small>%</small></p>
+                        <span class="metric-note">Relative humidity</span>
+                    </article>
+
+                    <article class="metric-card panel">
+                        <div class="metric-top"><span>💨</span><span class="muted">WIND SPEED</span></div>
+                        <p><span id="wind">--</span><small> km/h</small></p>
+                        <span class="metric-note">Near the surface</span>
+                    </article>
+
+                    <article class="metric-card panel">
+                        <div class="metric-top"><span>🌡️</span><span class="muted">PRESSURE</span></div>
+                        <p><span id="pressure">--</span><small> hPa</small></p>
+                        <span class="metric-note">Sea-level pressure</span>
+                    </article>
+
+                    <article class="metric-card panel">
+                        <div class="metric-top"><span>👁️</span><span class="muted">VISIBILITY</span></div>
+                        <p><span id="visibility">--</span><small> km</small></p>
+                        <span class="metric-note">Estimated visibility</span>
+                    </article>
+
+                    <article class="metric-card panel">
+                        <div class="metric-top"><span>☀️</span><span class="muted">UV INDEX</span></div>
+                        <p><span id="uvIndex">--</span></p>
+                        <span id="uvNote" class="metric-note">UV conditions</span>
+                    </article>
+
+                    <article class="metric-card panel">
+                        <div class="metric-top"><span>🌧️</span><span class="muted">PRECIPITATION</span></div>
+                        <p><span id="precipitation">--</span><small> mm</small></p>
+                        <span class="metric-note">Current amount</span>
+                    </article>
+                </div>
+            </section>
+        </section>
+
+        <footer>
+            <span>Made for curious minds <span class="brand-dot">✦</span></span>
+            <span>Weather data by <a href="https://open-meteo.com/"
+               target="_blank" rel="noopener noreferrer">Open-Meteo</a></span>
+        </footer>
+    </main>
+
+    <script src="weather.js"></script>
+</body>
+</html>
